@@ -6,6 +6,9 @@ import price.analyst.DTO.StockInfo;
 import price.analyst.DTO.StockInfoResponse;
 import price.analyst.Service.InfoFetcherService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class InfoFetcherServiceImpl implements InfoFetcherService {
 
@@ -33,5 +36,12 @@ public class InfoFetcherServiceImpl implements InfoFetcherService {
                 .averageUpside(((stockInfo.getOverview().getPtConsensus().get(0).getPriceTarget()-lastPrice)/lastPrice)*100)
                 .lowUpside(((stockInfo.getOverview().getPtConsensus().get(0).getLow()-lastPrice)/lastPrice)*100)
                 .build();
+    }
+
+    @Override
+    public List<StockInfoResponse> getInfoForTickers(List<String> tickers) {
+        List<StockInfoResponse> stockInfoResponseList = new ArrayList<>();
+        tickers.forEach(ticker -> stockInfoResponseList.add(getInfoForTicker(ticker)));
+        return stockInfoResponseList;
     }
 }
