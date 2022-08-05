@@ -6,4 +6,6 @@ public interface TipRanksConnector {
 
     StockInfo getDataForTicker(String ticker);
 
+    StockInfo getDataForTickerAsync(String ticker);
+
 }

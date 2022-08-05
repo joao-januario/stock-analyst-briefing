@@ -1,6 +1,7 @@
 package price.analyst.Connector.Impl;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import price.analyst.Connector.TipRanksConnector;
@@ -16,5 +17,10 @@ public class TipRanksConnectorImpl implements TipRanksConnector {
         String urlString = baseUrl+ticker;
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForEntity(urlString, StockInfo.class).getBody();
+    }
+
+    @Async
+    public StockInfo getDataForTickerAsync(String ticker){
+        return getDataForTicker(ticker);
     }
 }
